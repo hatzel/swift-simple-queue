@@ -23,18 +23,18 @@ class Element<T> {
     }
 }
 
-struct FifoQueue<T> {
+public struct FifoQueue<T> {
     private var first: Element<T>?
     private var last: Element<T>?
-    private(set) var count = 0
-    init () {
+    public private(set) var count = 0
+    public init () {
     }
-    init (array: Array<T>) {
+    public init (array: Array<T>) {
         for a in array {
             self.push(a)
         }
     }
-    mutating func push(data: T) {
+    public mutating func push(data: T) {
         count += 1
         guard first != nil else {
             first = Element(input: data)
@@ -50,10 +50,7 @@ struct FifoQueue<T> {
         self.last = append
     }
 
-    func getlast() -> Element<T>? {
-        return self.last
-    }
-    mutating func pop() -> T? {
+    public mutating func pop() -> T? {
         guard first != nil else {return nil}
         count -= 1
         let data = first!.data
@@ -61,7 +58,13 @@ struct FifoQueue<T> {
         return data
     }
 
-    var isEmpty: Bool {
+    public var last: T? {
+        get {
+            return self.last
+        }
+    }
+
+    public var isEmpty: Bool {
         get {
             return first == nil
         }
