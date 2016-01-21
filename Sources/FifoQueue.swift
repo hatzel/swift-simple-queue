@@ -25,7 +25,7 @@ class Element<T> {
 
 public struct FifoQueue<T> {
     private var first: Element<T>?
-    private var last: Element<T>?
+    private var end: Element<T>?
     public private(set) var count = 0
     public init () {
     }
@@ -40,14 +40,14 @@ public struct FifoQueue<T> {
             first = Element(input: data)
             return
         }
-        guard last != nil else {
-            last = Element(input: data)
-            first!.next = last!
+        guard end != nil else {
+            end = Element(input: data)
+            first!.next = end!
             return
         }
         let append = Element(input: data)
-        last!.next = append
-        self.last = append
+        end!.next = append
+        self.end = append
     }
 
     public mutating func pop() -> T? {
@@ -60,7 +60,7 @@ public struct FifoQueue<T> {
 
     public var last: T? {
         get {
-            return self.last
+            return self.end?.data
         }
     }
 
